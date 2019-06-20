@@ -1,0 +1,74 @@
+﻿@model NewCustomerCheck.Models.ActivityModel
+
+@{
+    ViewData["Title"] = "添加活动";
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>使用淘宝接口</h3>
+            </div>
+
+            <div class="title_right">
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>添加活动 <small>请认真填写活动内容，之后可直接点击活动名字进行查询</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form asp-action="Create" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ActivityApiID">
+                                    
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" asp-for="ActivityApiID" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                                <span asp-validation-for="ActivityApiID" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ActivityName">
+                                    
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" asp-for="ActivityName" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                                <span asp-validation-for="ActivityName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ActivityKindEnum" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select asp-for="ActivityKindEnum" class="form-control col-md-7 col-xs-12" asp-items="ViewBag.ActivityKind"> </select>
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <a class="btn btn-primary" asp-action="Index">取消</a>
+                                    <button class="btn btn-primary" type="reset">重置</button>
+                                    <button type="submit" class="btn btn-success">提交</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->

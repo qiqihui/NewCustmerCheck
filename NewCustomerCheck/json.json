@@ -1,0 +1,17 @@
+{
+  "lbs": "1.0",
+  "qulityRate": "1.5",
+  "basePrice": "2000",
+  "bindPrice": "2000",
+  "promoterCode": "Y",
+  "settleAmountHexiao": "948000",
+  "settleAmountBind": "122000",
+  "settleAmount": "1070000",
+  "userPrizeCount": "360",
+  "userConsumeCount": "336",
+  "userConsumeSettleCount": "316",
+  "userCertCount": "0",
+  "userCertSettleCount": "0",
+  "userBindCardCount": "101",
+  "userBindCardSettleCount": "61"
+}

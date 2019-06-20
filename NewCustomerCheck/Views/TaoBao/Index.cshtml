@@ -1,0 +1,83 @@
+﻿@model IEnumerable<NewCustomerCheck.Models.ActivityModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>使用淘宝接口 <small>此活动列表均使用淘宝接口查询数据</small></h3>
+            </div>
+
+            <div class="title_right">
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>活动列表<small>点击数据按钮可查看详细数据</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="x_content">
+
+                        <a asp-action="Create">Create New</a>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped jambo_table bulk_action">
+                                <thead>
+                                    <tr class="headings">
+                                        <th>
+                                            <input type="checkbox" id="check-all" class="flat">
+                                        </th>
+                                        <th class="column-title">@Html.DisplayNameFor(model => model.ActivityApiID) </th>
+                                        <th class="column-title">@Html.DisplayNameFor(model => model.ActivityName)</th>
+                                        <th class="column-title">@Html.DisplayNameFor(model => model.ActivityKindEnum)</th>
+                                        <th class="column-title no-link last">
+                                            <span class="nobr">操作</span>
+                                        </th>
+                                        <th class="bulk-actions" colspan="7">
+                                            <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="even pointer">
+                                            <td class="a-center ">
+                                                <input type="checkbox" class="flat" name="table_records">
+                                            </td>
+                                            <td class=" ">@Html.DisplayFor(modelItem => item.ActivityApiID)</td>
+                                            <td class=" ">@Html.DisplayFor(modelItem => item.ActivityName)</td>
+                                            <td class=" ">@Html.DisplayFor(modelItem => item.ActivityKindEnum)</td>
+                                            <td class=" last">
+                                                <a asp-action="Edit" asp-route-id="@item.ID">编辑</a> |
+                                                <a asp-action="Details" asp-route-id="@item.ID">明细</a> |
+                                                <a asp-action="Delete" asp-route-id="@item.ID">删除</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->

@@ -1,0 +1,76 @@
+﻿@model NewCustomerCheck.Models.ActivityModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>使用淘宝接口</h3>
+            </div>
+
+            <div class="title_right">
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>删除活动 <small>请确认删除</small></h2>
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ActivityApiID">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input disabled="disabled" type="text" asp-for="ActivityApiID" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                                <span asp-validation-for="ActivityApiID" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ActivityName">
+
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input disabled="disabled" type="text" asp-for="ActivityName" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                                <span asp-validation-for="ActivityName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ActivityKindEnum" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select disabled="disabled" asp-for="ActivityKindEnum" class="form-control col-md-7 col-xs-12" asp-items="ViewBag.ActivityKind"> </select>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="ln_solid"></div>
+                        <form asp-action="Delete">
+                            <input type="hidden" asp-for="ID" />
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <a class="btn btn-primary" asp-action="Index">取消</a>
+                                    <input value="删除" type="submit" class="btn btn-danger">
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->

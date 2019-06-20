@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using ConfigSaveByJson;
 
 namespace NewCustomerCheck
 {
@@ -20,5 +21,8 @@ namespace NewCustomerCheck
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+
+
+        public static Websiteconfig Websiteconfig = ConfigSaveByJson.ConfigSaveByJson.Read<Websiteconfig>(Environment.CurrentDirectory + "websiteconfig.json");
     }
 }
