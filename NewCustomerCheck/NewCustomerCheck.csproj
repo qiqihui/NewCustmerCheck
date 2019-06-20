@@ -31,6 +31,9 @@
     <Reference Include="ConfigSaveByJson">
       <HintPath>..\..\..\..\.nuget\packages\configsavebyjson\1.0.0\bin\Debug\ConfigSaveByJson.dll</HintPath>
     </Reference>
+    <Reference Include="TopSdk">
+      <HintPath>E:\小江\淘宝联盟.netSDK\TopSdk.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

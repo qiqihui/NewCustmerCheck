@@ -33,8 +33,8 @@ $('#wizard').smartWizard({
     enableFinishButton: false, // makes finish button enabled always
 	hideButtonsOnDisabled: false, // when the previous/next/finish buttons are disabled, hide them instead
     errorSteps:[],    // array of step numbers to highlighting as error steps
-    labelNext:'Next', // label for Next button
-    labelPrevious:'Previous', // label for Previous button
+    labelNext:"下一页", // label for Next button
+    labelPrevious:"下一页", // label for Previous button
     labelFinish:'Finish',  // label for Finish button        
     noForwardJumping:false,
   // Events

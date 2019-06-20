@@ -42,7 +42,7 @@ var nestedOptions = new Options({
       text: 'Default',
       children: [
         {
-          text: 'Next',
+          text: "обр╩рЁ",
           children: [
             {
               id: 'a',

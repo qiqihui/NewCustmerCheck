@@ -11317,7 +11317,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Next",
+				"sNext": "下一页",
 	
 	
 				/**
@@ -11340,7 +11340,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Previous"
+				"sPrevious": "上一页"
 			},
 	
 			/**
@@ -11395,7 +11395,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "页数: _START_ （共 _END_ 页） _TOTAL_ 个元素",
 	
 	
 			/**
@@ -11416,7 +11416,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "页数: 0 （共 0 页） 0 个元素",
 	
 	
 			/**
@@ -11840,10 +11840,10 @@
 		 * DataTables features four different built-in options for the buttons to
 		 * display for pagination control:
 		 *
-		 * * `simple` - 'Previous' and 'Next' buttons only
-		 * * 'simple_numbers` - 'Previous' and 'Next' buttons, plus page numbers
-		 * * `full` - 'First', 'Previous', 'Next' and 'Last' buttons
-		 * * `full_numbers` - 'First', 'Previous', 'Next' and 'Last' buttons, plus
+		 * * `simple` - "下一页" and "下一页" buttons only
+		 * * 'simple_numbers` - "下一页" and "下一页" buttons, plus page numbers
+		 * * `full` - 'First', "下一页", "下一页" and 'Last' buttons
+		 * * `full_numbers` - 'First', "下一页", "下一页" and 'Last' buttons, plus
 		 *   page numbers
 		 *  
 		 * Further methods can be added using {@link DataTable.ext.oPagination}.
