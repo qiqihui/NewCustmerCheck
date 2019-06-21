@@ -1,0 +1,148 @@
+﻿@model NewCustomerCheck.Controllers.DetailModel
+@{
+    ViewData["Title"] = "支付宝线下详细查询";
+}
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>支付宝接口</h3>
+            </div>
+
+            <div class="title_right">
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>查询明细数据 <small>请选择日期，并获得点击查询</small></h2>
+                        <ul class="nav navbar-right panel_toolbox"></ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form asp-action="Detail" class="form-horizontal form-label-left" method="get">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    日期
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input asp-for="OrginDate" type="text" class="form-control has-feedback-left" id="single_cal4" placeholder="日期" aria-describedby="inputSuccess2Status4">
+                                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                    <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button type="submit" class="btn btn-success">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        @if (Model.NoSearch)
+        {
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <button class="close" aria-label="Close" type="button" data-dismiss="alert">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <strong>由于数据过多，可能速度稍慢！</strong> 请耐心等待
+            </div>
+        }
+
+        <div class="clearfix"></div>
+        @if (!Model.NoData)
+        {
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>支付宝线下总数据 <small>@Model.OrginDate</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a href="#">Settings 1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <p class="text-muted font-13 m-b-30">
+                                点击下面三个按钮可生成文件下载
+                            </p>
+                            <table id="datatable-buttons" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>二级渠道</th>
+                                        <th>被邀请手机号</th>
+                                        <th>省份</th>
+                                        <th>城市</th>
+                                        <th>地域系数</th>
+                                        <th>用户领奖时间</th>
+                                        <th>用户实名时间</th>
+                                        <th>绑卡时间</th>
+                                        <th>是否可结算核销用户</th>
+                                        <th>是否可结算的绑卡用户</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    @foreach (var item in Model.DataModelList)
+                                    {
+                                        <tr>
+                                            <td>@item.PartnerId</td>
+                                            <td>@item.InvitedPhone</td>
+                                            <td>@item.ProvinceName</td>
+                                            <td>@item.CityName</td>
+                                            <td>@item.LbsRateDeci.ToString("#0.0")</td>
+                                            <td>@item.UserPrizeTimeDateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                            <td>@item.UserCertTimeDateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                            <td>@item.UserBindCardTimeDateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                            <td>@(item.Settled ? "是" : "否")</td>
+                                            <td>@(item.SettledAndBind ? "是" : "否")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (!Model.NoSearch)
+        {
+            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button class="close" aria-label="Close" type="button" data-dismiss="alert">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <strong>次日没有数据！</strong> 请选择其他日期
+            </div>
+        }
+
+    </div>
+</div>
+<!-- /page content -->

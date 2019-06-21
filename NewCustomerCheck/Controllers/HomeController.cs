@@ -23,12 +23,12 @@ namespace NewCustomerCheck.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Nothing");
         }
 
         public IActionResult Privacy()
         {
-            return View();
+            return View("Nothing");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -39,7 +39,7 @@ namespace NewCustomerCheck.Controllers
 
         public IActionResult DataWindow()
         {
-            return View();
+            return View("Nothing");
         }
 
         public string Test()

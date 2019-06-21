@@ -76,8 +76,58 @@ namespace NewCustomerCheck.Controllers
             }
             return View(sumModel); 
         }
+
+        public async Task<IActionResult> Detail(DetailModel detailModel)
+        {
+            if (detailModel.OrginDate != null)
+            {
+                detailModel.NoSearch = false;
+                DateTimeFormatInfo ogdtFormat = new DateTimeFormatInfo();
+                ogdtFormat.ShortDatePattern = "MM/dd/yyyy";
+                DateTime date = Convert.ToDateTime(detailModel.OrginDate, ogdtFormat);
+                string reportdate = date.ToString("yyyyMMdd");
+                IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", Program.Websiteconfig.AliPayAppID, Program.Websiteconfig.AliPayPrivateKey, "json", "1.0", "RSA2", Program.Websiteconfig.AliPayPublicKey, "utf-8", false);
+                var pageindex = 1;
+                while (true)
+                {
+                    AlipayUserInviteOfflinedetailQueryRequest request = new AlipayUserInviteOfflinedetailQueryRequest();
+                    request.BizContent = "{" +
+                    "\"pid\":\"" + Program.Websiteconfig.Pid + "\"," +
+                    "\"report_date\":\"" + reportdate + "\"," +
+                    //"\"partner_id\":\"" + partner_id + "\"," +
+                    "\"page\":" + pageindex + "," +
+                    "\"page_size\":" + 500 +
+                    "  }";
+                    AlipayUserInviteOfflinedetailQueryResponse response = client.Execute(request);
+                    if (response.OfflineDetailInfoList != null)
+                    {
+                        detailModel.DataModelList.AddRange(response.OfflineDetailInfoList);
+                        detailModel.NoData = false;
+                        pageindex++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+            }
+            return View(detailModel);
+        }
     }
 
+    public class DetailModel
+    {
+        public bool NoData { get; set; } = true;
+
+        public bool NoSearch { get; set; } = true;
+
+        public string OrginDate { get; set; }
+
+        public int PageIndex { get; set; } = 1;
+
+        public List<OfflineDetailInfo> DataModelList { get; set; } = new List<OfflineDetailInfo>();
+    }
 
     /// <summary>
     /// Sum页面模型
