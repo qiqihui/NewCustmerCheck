@@ -23,16 +23,14 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="E:\小江\支付宝当面付.netSDK\3.2.16\AopSdk.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
+    <Reference Include="AopSdk">
+      <HintPath>AopSdk.dll</HintPath>
+    </Reference>
     <Reference Include="ConfigSaveByJson">
       <HintPath>..\..\..\..\.nuget\packages\configsavebyjson\1.0.0\bin\Debug\ConfigSaveByJson.dll</HintPath>
     </Reference>
     <Reference Include="TopSdk">
-      <HintPath>E:\小江\淘宝联盟.netSDK\TopSdk.dll</HintPath>
+      <HintPath>TopSdk.dll</HintPath>
     </Reference>
   </ItemGroup>
 

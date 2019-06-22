@@ -95,6 +95,7 @@
                                 <thead>
                                     <tr>
                                         <th>@Html.DisplayNameFor(m=>m.DataModelList[0].PartnerId)</th>
+                                        <th>结算时间</th>
                                         <th>核销返佣金额</th>
                                         <th>绑卡返佣金额</th>
                                         <th>当日返佣金额</th>
@@ -113,7 +114,8 @@
                                     @foreach (var item in Model.DataModelList)
                                     {
                                         <tr>
-                                            <td>@item.PartnerId</td>
+                                            <td>"@item.PartnerId"</td>
+                                            <td>@item.ReportDate</td>
                                             <td>@item.settleAmountHexiao.ToString("#0.00")</td>
                                             <td>@item.settleAmountBind.ToString("#0.00")</td>
                                             <td>@item.settleAmount.ToString("#0.00")</td>

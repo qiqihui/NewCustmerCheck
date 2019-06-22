@@ -1,5 +1,9 @@
 ﻿@using Microsoft.EntityFrameworkCore
 @inject NewCustomerCheckContext _context
+@{ 
+    List<ActivityModel> activityModels = await _context.ActivityModel.ToListAsync();
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,6 +81,11 @@
                                     <a><i class="fa fa-bar-chart-o"></i> 淘宝接口 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a asp-controller="TaoBao" asp-action="create">添加活动</a></li>
+                                        @foreach (var activity in activityModels)
+                                        {
+                                            <li><a asp-controller="TaoBao" asp-action="Sum" asp-route-ActivityID="@activity.ID">@activity.ActivityName 总数据</a></li>
+                                            <li><a asp-controller="TaoBao" asp-action="Detail" asp-route-ActivityID="@activity.ID">@activity.ActivityName 明细</a></li>
+                                        }
                                     </ul>
                                 </li>
                                 <li>

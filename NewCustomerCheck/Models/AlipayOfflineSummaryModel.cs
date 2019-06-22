@@ -54,7 +54,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.settleAmountHexiao;
+                        if (extinfoitem.settleAmountHexiao != null)
+                        {
+                            data += extinfoitem.settleAmountHexiao.Value;
+                        }
+                        
                     }
                     return data;
                 }
@@ -74,7 +78,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.settleAmountBind;
+                        if (extinfoitem.settleAmountBind != null)
+                        {
+                            data += extinfoitem.settleAmountBind.Value;
+                        }
+                        
                     }
                     return data;
                 }
@@ -93,7 +101,10 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.settleAmount;
+                        if (extinfoitem.settleAmount != null)
+                        {
+                            data += extinfoitem.settleAmount.Value;
+                        }
                     }
                     return data;
                 }
@@ -113,7 +124,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.userPrizeCount;
+                        if (extinfoitem.userPrizeCount != null)
+                        {
+                            data += extinfoitem.userPrizeCount.Value;
+                        }
+                        
                     }
                     return data;
                 }
@@ -133,7 +148,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.userConsumeCount;
+                        if (extinfoitem.userConsumeCount != null)
+                        {
+                            data += extinfoitem.userConsumeCount.Value;
+                        }
+                        
                     }
                     return data;
                 }
@@ -153,7 +172,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.userConsumeSettleCount;
+                        if (extinfoitem.userConsumeSettleCount != null)
+                        {
+                            data += extinfoitem.userConsumeSettleCount.Value;
+                        }
+                       
                     }
                     return data;
                 }
@@ -173,7 +196,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.userCertCount;
+                        if (extinfoitem.userCertCount != null)
+                        {
+                            data += extinfoitem.userCertCount.Value;
+                        }
+                        
                     }
                     return data;
                 }
@@ -193,7 +220,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.userCertSettleCount;
+                        if (extinfoitem.userCertSettleCount != null)
+                        {
+                            data += extinfoitem.userCertSettleCount.Value;
+                        }
+                        
                     }
                     return data;
                 }
@@ -214,7 +245,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.userBindCardCount;
+                        if (extinfoitem.userBindCardCount != null)
+                        {
+                            data += extinfoitem.userBindCardCount.Value;
+                        }
+                        
                     }
                     return data;
                 }
@@ -234,7 +269,11 @@ namespace NewCustomerCheck.Models
                     decimal data = 0;
                     foreach (var extinfoitem in ExtInfoList)
                     {
-                        data += extinfoitem.userBindCardSettleCount;
+                        if (extinfoitem.userBindCardSettleCount != null)
+                        {
+                            data += extinfoitem.userBindCardSettleCount.Value;
+                        }
+                        
                     }
                     return data;
                 }
@@ -251,19 +290,19 @@ namespace NewCustomerCheck.Models
     {
         [DataMember]
         [Display(Name = "区域系数")]
-        public decimal lbs { get; set; }
+        public string lbs { get; set; }
 
         [DataMember]
         [Display(Name = "质量系数")]
-        public decimal qulityRate { get; set; }
+        public string qulityRate { get; set; }
 
         [DataMember]
         [Display(Name = "核销基础单价")]
-        public decimal basePrice { get; set; }
+        public decimal? basePrice { get; set; }
 
         [DataMember]
         [Display(Name = "绑卡单价")]
-        public decimal bindPrice { get; set; }
+        public decimal? bindPrice { get; set; }
 
         [DataMember]
         [Display(Name = "是否福利码（Y/N）")]
@@ -271,43 +310,43 @@ namespace NewCustomerCheck.Models
 
         [DataMember]
         [Display(Name = "核销返佣金额")]
-        public decimal settleAmountHexiao { get; set; }
+        public decimal? settleAmountHexiao { get; set; }
 
         [DataMember]
         [Display(Name = "绑卡返佣金额")]
-        public decimal settleAmountBind { get; set; }
+        public decimal? settleAmountBind { get; set; }
 
         [DataMember]
         [Display(Name = "当日返佣金额")]
-        public decimal settleAmount { get; set; }
+        public decimal? settleAmount { get; set; }
 
         [DataMember]
         [Display(Name = "权益领取用户数")]
-        public decimal userPrizeCount { get; set; }
+        public decimal? userPrizeCount { get; set; }
 
         [DataMember]
         [Display(Name = "权益核销用户数")]
-        public decimal userConsumeCount { get; set; }
+        public decimal? userConsumeCount { get; set; }
         
         [DataMember]
         [Display(Name = "可结算核销用户数")]
-        public decimal userConsumeSettleCount { get; set; }
+        public decimal? userConsumeSettleCount { get; set; }
 
         [DataMember]
         [Display(Name = "实名用户数")]
-        public decimal userCertCount { get; set; }
+        public decimal? userCertCount { get; set; }
 
         [DataMember]
         [Display(Name = "可结算实名用户数")]
-        public decimal userCertSettleCount { get; set; }
+        public decimal? userCertSettleCount { get; set; }
 
         [DataMember]
         [Display(Name = "绑卡用户数")]
-        public decimal userBindCardCount { get; set; }
+        public decimal? userBindCardCount { get; set; }
 
         [DataMember]
         [Display(Name = "可结算绑卡用户数")]
-        public decimal userBindCardSettleCount { get; set; }
+        public decimal? userBindCardSettleCount { get; set; }
 
     }
 
