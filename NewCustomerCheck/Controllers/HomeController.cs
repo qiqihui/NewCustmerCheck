@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,10 @@ namespace NewCustomerCheck.Controllers
 
         public IActionResult Index()
         {
+            if (!System.IO.File.Exists(Path.Combine(Environment.CurrentDirectory , "websiteconfig.json")))
+            {
+                ConfigSaveByJson.ConfigSaveByJson.Write<Websiteconfig>(Program.Websiteconfig,Path.Combine(Environment.CurrentDirectory, "websiteconfig.json"));
+            }
             return View("Nothing");
         }
 

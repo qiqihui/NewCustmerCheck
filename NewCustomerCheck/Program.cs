@@ -23,6 +23,6 @@ namespace NewCustomerCheck
                 .UseStartup<Startup>();
 
 
-        public static Websiteconfig Websiteconfig = ConfigSaveByJson.ConfigSaveByJson.Read<Websiteconfig>(Environment.CurrentDirectory + "websiteconfig.json");
+        public static Websiteconfig Websiteconfig = ConfigSaveByJson.ConfigSaveByJson.Read<Websiteconfig>(Path.Combine(Environment.CurrentDirectory, "websiteconfig.json"));
     }
 }
