@@ -3,6 +3,9 @@
 ###############################################################################
 * text=auto
 
+*.js linguist-language=c#
+
+*.css linguist-language=c#
 ###############################################################################
 # Set default behavior for command prompt diff.
 #
