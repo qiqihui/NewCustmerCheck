@@ -40,9 +40,10 @@
                                     日期
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input asp-for="OrginDate" type="text" class="form-control has-feedback-left" id="single_cal4" placeholder="日期" aria-describedby="inputSuccess2Status4">
-                                    <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                                    <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                                    <div class="input-prepend input-group">
+                                        <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                        <input type="text" style="width: 200px" asp-for="OrginDate" id="reservation" class="form-control">
+                                    </div>
                                 </div>
                             </div>
 
@@ -116,9 +117,9 @@
                                         <tr>
                                             <td>"@item.PartnerId"</td>
                                             <td>@item.ReportDate</td>
-                                            <td>@item.settleAmountHexiao.ToString("#0.00")</td>
-                                            <td>@item.settleAmountBind.ToString("#0.00")</td>
-                                            <td>@item.settleAmount.ToString("#0.00")</td>
+                                            <td>@(item.settleAmountHexiao * 0.01m)</td>
+                                            <td>@((item.settleAmountBind * 0.01m))</td>
+                                            <td>@((item.settleAmount*0.01m))</td>
                                             <td>@item.userPrizeCount.ToString("#0")</td>
                                             <td>@item.userConsumeCount.ToString("#0")</td>
                                             <td>@item.userConsumeSettleCount.ToString("#0")</td>

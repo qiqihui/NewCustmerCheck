@@ -233,14 +233,7 @@ namespace NewCustomerCheck.Controllers
             if (!detailModel.NoSearch)
             {
                 detailModel.NoSearch = false;
-                string FirstDate = "";
-                string FinalDate = "";
-                if (!string.IsNullOrEmpty(detailModel.FirstDate))
-                {
-                    string[] datesplit = detailModel.FirstDate.Split(" - ");
-                    FirstDate = datesplit[0];
-                    FinalDate = datesplit[1];
-                }
+                List<DateTime> times = DateTimeToDateClass.DateStrToDoubleDateTime(detailModel.FirstDate);
                 while (true)
                 {
                     ITopClient client = new DefaultTopClient("http://gw.api.taobao.com/router/rest", Program.Websiteconfig.TaoBaoAppKey, Program.Websiteconfig.TaoBaoAppSecret, "json");
@@ -248,11 +241,8 @@ namespace NewCustomerCheck.Controllers
                     req.PageSize = 100;
                     //req.AdzoneId = 123L;
                     req.PageNo = pageindex;
-                    if (FirstDate != "" && FinalDate != "")
-                    {
-                        req.StartTime = DateTime.Parse(FirstDate);
-                        req.EndTime = DateTime.Parse(FinalDate);
-                    }
+                    req.StartTime = times[0];
+                    req.EndTime = times[1];
                     req.ActivityId = activity.ActivityApiID;
                     TbkDgNewuserOrderGetResponse rsp = client.Execute(req);
                     if (rsp.Results.Data.Results == null)
@@ -380,5 +370,36 @@ namespace NewCustomerCheck.Controllers
             [DataMember(Name = "pay_time")]
             public string PayTime { get; set; }
         }
+    }
+
+    public partial class DateTimeToDateClass
+    {
+        public static List<DateTime> DateStrToDoubleDateTime(string str)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                string[] datesplit = str.Split(" - ");
+                var FirstDate = datesplit[0];
+                var FinalDate = datesplit[1];
+                if (FirstDate != "" && FinalDate != "")
+                {
+                    List<DateTime> result = new List<DateTime>()
+                    {
+                        DateTime.Parse(FirstDate),
+                        DateTime.Parse(FinalDate),
+                    };
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+
+            }
+            else
+            {
+                return null;
+            }
+        } 
     }
 }

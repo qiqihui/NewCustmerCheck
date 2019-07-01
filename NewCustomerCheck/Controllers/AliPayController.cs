@@ -17,29 +17,44 @@ namespace NewCustomerCheck.Controllers
         {
             if (sumModel.OrginDate != null) //如果开始搜索
             {
-                DateTimeFormatInfo ogdtFormat = new DateTimeFormatInfo();
-                ogdtFormat.ShortDatePattern = "MM/dd/yyyy";
-                DateTimeFormatInfo fndtFormat = new DateTimeFormatInfo();
-                fndtFormat.ShortDatePattern = "yyyyMMdd";
-                DateTime date = Convert.ToDateTime(sumModel.OrginDate, ogdtFormat);
-                string reportdate = date.ToString("yyyyMMdd");
-                IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", Program.Websiteconfig.AliPayAppID, Program.Websiteconfig.AliPayPrivateKey, "json", "1.0", "RSA2", Program.Websiteconfig.AliPayPublicKey, "utf-8", false);
-                AlipayUserInviteOfflinesummaryQueryRequest request = new AlipayUserInviteOfflinesummaryQueryRequest();
-                request.BizContent = "{" +
-                "\"pid\":\"" + Program.Websiteconfig.Pid + "\"," +
-                "\"report_date\":\"" + reportdate + "\"" +
-                //"\"partner_id\":\"m_qvdao1_qvdao2\"" +
-                "  }";
-                AlipayUserInviteOfflinesummaryQueryResponse response = client.Execute(request);
+                List<AlipayOfflineSummaryModel> finalModelList = new List<AlipayOfflineSummaryModel>();
+                List<DateTime> times = DateTimeToDateClass.DateStrToDoubleDateTime(sumModel.OrginDate);
 
-                if (response.OfflineInviteNewerSummaryInfoList != null)
+                DateTime dt1 = new DateTime(times[0].Year, times[0].Month, times[0].Day);
+                DateTime dt2 = new DateTime(times[1].Year, times[1].Month, times[1].Day);
+                IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", Program.Websiteconfig.AliPayAppID, Program.Websiteconfig.AliPayPrivateKey, "json", "1.0", "RSA2", Program.Websiteconfig.AliPayPublicKey, "utf-8", false);
+                for (DateTime dt3 = dt1;dt3 <= dt2; dt3 = dt3.AddDays(1))
                 {
-                    List<AlipayOfflineSummaryModel> finalModelList = new List<AlipayOfflineSummaryModel>();
-                    foreach (var rspitem in response.OfflineInviteNewerSummaryInfoList)
+                    AlipayUserInviteOfflinesummaryQueryRequest request = new AlipayUserInviteOfflinesummaryQueryRequest();
+                    request.BizContent = "{" +
+                    "\"pid\":\"" + Program.Websiteconfig.Pid + "\"," +
+                    "\"report_date\":\"" + dt3.ToString("yyyyMMdd") + "\"" +
+                    //"\"partner_id\":\"m_qvdao1_qvdao2\"" +
+                    "  }";
+                    AlipayUserInviteOfflinesummaryQueryResponse response = client.Execute(request);
+                    if (response.OfflineInviteNewerSummaryInfoList != null)
                     {
-                        if (sumModel.OrginPartnerid != null)
+                        foreach (var rspitem in response.OfflineInviteNewerSummaryInfoList)
                         {
-                            if (rspitem.PartnerId == sumModel.OrginPartnerid)
+                            if (sumModel.OrginPartnerid != null)
+                            {
+                                if (rspitem.PartnerId == sumModel.OrginPartnerid)
+                                {
+                                    AlipayOfflineSummaryModel alipayOfflineSummaryModelitem = new AlipayOfflineSummaryModel()
+                                    {
+                                        ExtInfo = rspitem.ExtInfo,
+                                        Pid = rspitem.Pid,
+                                        ReportDate = rspitem.ReportDate,
+                                        PartnerId = rspitem.PartnerId,
+                                    };
+                                    finalModelList.Add(alipayOfflineSummaryModelitem);
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                            }
+                            else
                             {
                                 AlipayOfflineSummaryModel alipayOfflineSummaryModelitem = new AlipayOfflineSummaryModel()
                                 {
@@ -50,27 +65,11 @@ namespace NewCustomerCheck.Controllers
                                 };
                                 finalModelList.Add(alipayOfflineSummaryModelitem);
                             }
-                            else
-                            {
-                                continue;
-                            }
-                        }
-                        else
-                        {
-                            AlipayOfflineSummaryModel alipayOfflineSummaryModelitem = new AlipayOfflineSummaryModel()
-                            {
-                                ExtInfo = rspitem.ExtInfo,
-                                Pid = rspitem.Pid,
-                                ReportDate = rspitem.ReportDate,
-                                PartnerId = rspitem.PartnerId,
-                            };
-                            finalModelList.Add(alipayOfflineSummaryModelitem);
                         }
                     }
-
-                    sumModel.DataModelList = finalModelList;
-                    sumModel.NoData = false;
                 }
+                sumModel.DataModelList = finalModelList;
+                sumModel.NoData = false;
 
                 sumModel.NoSearch = false;
             }
@@ -82,10 +81,7 @@ namespace NewCustomerCheck.Controllers
             if (detailModel.OrginDate != null)
             {
                 detailModel.NoSearch = false;
-                DateTimeFormatInfo ogdtFormat = new DateTimeFormatInfo();
-                ogdtFormat.ShortDatePattern = "MM/dd/yyyy";
-                DateTime date = Convert.ToDateTime(detailModel.OrginDate, ogdtFormat);
-                string reportdate = date.ToString("yyyyMMdd");
+                string reportdate = DateTimeToDateClass.DateStrToDateStr(detailModel.OrginDate);
                 IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", Program.Websiteconfig.AliPayAppID, Program.Websiteconfig.AliPayPrivateKey, "json", "1.0", "RSA2", Program.Websiteconfig.AliPayPublicKey, "utf-8", false);
                 var pageindex = 1;
                 while (true)
@@ -139,6 +135,7 @@ namespace NewCustomerCheck.Controllers
         /// </summary>
         public string OrginDate { get; set; }
 
+
         /// <summary>
         /// 原始数据
         /// </summary>
@@ -149,5 +146,21 @@ namespace NewCustomerCheck.Controllers
         public bool NoData { get; set; } = true;
 
         public bool NoSearch { get; set; } = true;
+    }
+
+    public partial class DateTimeToDateClass
+    {
+        /// <summary>
+        /// 将格式为MM/dd/yyyy转换为格式yyyyMMdd
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string DateStrToDateStr(string str)
+        {
+            DateTimeFormatInfo ogdtFormat = new DateTimeFormatInfo();
+            ogdtFormat.ShortDatePattern = "MM/dd/yyyy";
+            DateTime date = Convert.ToDateTime(str, ogdtFormat);
+            return date.ToString("yyyyMMdd");
+        }
     }
 }
